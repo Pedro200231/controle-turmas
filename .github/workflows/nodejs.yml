@@ -26,6 +26,10 @@ jobs:
         working-directory: backend
         run: npm ci
 
+      - name: Setup environment file
+        working-directory: backend
+        run: cp .env.example .env
+
       - name: Run backend tests and coverage
         working-directory: backend
         run: npm run test:backend

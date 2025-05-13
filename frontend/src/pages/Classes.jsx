@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { AuthContext } from '../context/AuthContext';
+import styles from './Classes.module.css';
 
 export default function Classes() {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const [students, setStudents] = useState([]);
     const [classes, setClasses] = useState([]);
@@ -48,7 +51,7 @@ export default function Classes() {
     const handleCreateClass = async e => {
         e.preventDefault();
         if (!courseId || !professorId) {
-            setError('Escolha curso e professor (IDs).');
+            setError('Selecione curso e professor');
             return;
         }
         try {
@@ -56,7 +59,17 @@ export default function Classes() {
                 course: courseId,
                 professor: professorId
             });
-            setClasses(prev => [...prev, newClass]);
+
+            const fullCourse = courses.find(c => c._id === newClass.course);
+            const fullProfessor = professors.find(p => p._id === newClass.professor);
+
+            const enrichedClass = {
+                ...newClass,
+                course: fullCourse,
+                professor: fullProfessor
+            };
+
+            setClasses(prev => [...prev, enrichedClass]);
             setCourseId('');
             setProfessorId('');
             setError('');
@@ -90,18 +103,27 @@ export default function Classes() {
     };
 
     return (
-        <div className="max-w-2xl mx-auto p-4 space-y-6">
-            <h2 className="text-xl">Turmas</h2>
-            {error && <p className="text-red-500">{error}</p>}
+        <div className={styles.container}>
+            <header className={styles.header}>
+                <h1 className={styles.title}>Turmas</h1>
+                <button
+                    onClick={() => navigate(-1)}
+                    className={styles.backButton}
+                >
+                    ← Voltar
+                </button>
+            </header>
 
-            {/* Formulário de criação: só aparece para admin */}
+            {error && <div className={styles.errorMessage}>{error}</div>}
+
+            {/* Formulário de criação para admin */}
             {user.role === 'admin' && (
-                <form onSubmit={handleCreateClass} className="space-y-2 border p-3 rounded">
-                    <h3 className="font-semibold">Criar Turma</h3>
+                <form onSubmit={handleCreateClass} className={styles.form}>
+                    <h3 className={styles.title}>Criar Turma</h3>
                     <select
                         value={courseId}
                         onChange={e => setCourseId(e.target.value)}
-                        className="w-full p-2 border rounded"
+                        className={styles.select}
                     >
                         <option value="">Selecione o curso</option>
                         {courses.map(c => (
@@ -111,7 +133,7 @@ export default function Classes() {
                     <select
                         value={professorId}
                         onChange={e => setProfessorId(e.target.value)}
-                        className="w-full p-2 border rounded"
+                        className={styles.select}
                     >
                         <option value="">Selecione o professor</option>
                         {professors.map(p => (
@@ -120,17 +142,17 @@ export default function Classes() {
                             </option>
                         ))}
                     </select>
-                    <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded">
+                    <button type="submit" className={styles.button}>
                         Criar Turma
                     </button>
                 </form>
             )}
 
             {/* Listagem de turmas */}
-            <ul className="space-y-4">
+            <ul className={styles.classList}>
                 {classes.map(c => (
-                    <li key={c._id} className="border p-3 rounded space-y-2">
-                        <div className="flex justify-between items-center">
+                    <li key={c._id} className={styles.classItem}>
+                        <div className={styles.classHeader}>
                             <div>
                                 <p><strong>Curso:</strong> {c.course.name}</p>
                                 <p><strong>Professor:</strong> {c.professor.name}</p>
@@ -138,13 +160,13 @@ export default function Classes() {
                             <p><strong>Alunos:</strong> {c.students.length}</p>
                         </div>
 
-                        {/* Para professor: form de adicionar aluno */}
+                        {/* Formulário para adicionar aluno */}
                         {user.role === 'professor' && c.professor._id === user._id && (
-                            <div className="flex space-x-2">
+                            <div className={styles.studentForm}>
                                 <select
                                     value={studentId}
                                     onChange={e => setStudentId(e.target.value)}
-                                    className="flex-1 p-2 border rounded"
+                                    className={styles.studentSelect}
                                 >
                                     <option value="">Selecione o aluno</option>
                                     {students.map(s => (
@@ -155,14 +177,13 @@ export default function Classes() {
                                 </select>
                                 <button
                                     onClick={() => handleAddStudent(c._id)}
-                                    className="px-3 py-1 bg-blue-600 text-white rounded"
+                                    className={styles.button}
                                 >
                                     Adicionar
                                 </button>
                             </div>
                         )}
 
-                        {/* Botão para listar detalhes de alunos */}
                         <button
                             onClick={async () => {
                                 const res = await api.get(`/classes/${c._id}/students`);
@@ -172,7 +193,7 @@ export default function Classes() {
                                         : 'Sem alunos ainda.'
                                 );
                             }}
-                            className="text-sm text-blue-600 underline"
+                            className={styles.detailsButton}
                         >
                             Ver Lista de Alunos
                         </button>

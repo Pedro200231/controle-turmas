@@ -1,0 +1,77 @@
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: #000;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #2d2d2d;
+}
+
+.title {
+    font-size: 1.5rem;
+    color: #e5e5e5;
+}
+
+.userName {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.logoutButton {
+    color: #dc2626;
+    background-color: #4e1c1caf;
+    border: 1px solid #7c7b7b8f;
+    border: none;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    
+}
+
+.logoutButton:hover {
+    background-color: #74717141;
+}
+
+.nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.navLink {
+    background-color: #0a0a0a;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    color: #e5e5e5;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #1f1f1f;
+    transition: all 0.3s;
+}
+
+.navLink:hover {
+    border-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.1);
+}
+
+.sectionTitle {
+    color: #737373;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

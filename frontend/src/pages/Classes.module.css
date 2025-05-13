@@ -1,0 +1,136 @@
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: #000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.title {
+  color: #dc2626;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.backButton {
+color: #dc2626;
+    background-color: #4e1c1caf;
+    border: 1px solid #7c7b7b8f;
+    border: none;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.backButton:hover {
+  background-color: #dc262610;
+}
+
+.errorMessage {
+  background-color: #dc262620;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #dc262640;
+}
+
+.form {
+  background-color: #0a0a0a;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #1f1f1f;
+  margin-bottom: 2rem;
+}
+
+.select {
+  width: 100%;
+  padding: 1rem;
+  background-color: #171717;
+  border: 1px solid #2d2d2d;
+  border-radius: 0.5rem;
+  color: white;
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+}
+
+.select:focus {
+  border-color: #dc2626;
+  outline: none;
+  box-shadow: 0 0 0 2px #dc262630;
+}
+
+.button {
+  padding: 1rem 2rem;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  background-color: #b91c1c;
+}
+
+.classList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.classItem {
+  background-color: #0a0a0a;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #1f1f1f;
+  transition: all 0.3s;
+  color: white;
+}
+
+.classItem:hover {
+  border-color: #dc2626;
+  transform: translateY(-2px);
+}
+
+.studentForm {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.studentSelect {
+  flex: 1;
+  composes: select;
+  margin-bottom: 0;
+}
+
+.detailsButton {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 1rem;
+  text-decoration: underline;
+}
+
+.detailsButton:hover {
+  color: #b91c1c;
+}

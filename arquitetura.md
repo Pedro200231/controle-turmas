@@ -1,6 +1,6 @@
 # Arquitetura do Sistema
 
-```` ```mermaid ````
+```mermaid
 flowchart LR
   subgraph Frontend [React App]
     A[Login / Dashboard]
@@ -29,4 +29,4 @@ flowchart LR
   G --> J
   H -- relacionamentos --> J
   I -- relacionamentos --> J
-```` ``` ````
+```

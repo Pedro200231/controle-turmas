@@ -84,10 +84,18 @@ router.get(
 router.get(
   '/',
   authMiddleware,
-  roleMiddleware(['admin']),
   async (req, res) => {
     try {
       const { role } = req.query;
+
+      if (role === 'professor' && req.user.role !== 'admin') {
+        return res.status(403).json({ message: 'Acesso negado.' });
+      }
+
+      if (role === 'aluno' && !['admin', 'professor'].includes(req.user.role)) {
+        return res.status(403).json({ message: 'Acesso negado.' });
+      }
+
       const filter = role ? { role } : {};
       const users = await User.find(filter).select('name role');
       res.json(users);

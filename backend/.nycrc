@@ -1,0 +1,10 @@
+{
+  "all": true,
+  "include": ["src/**/*.js"],
+  "reporter": ["text", "lcov"],
+  "check-coverage": true,
+  "statements": 80,
+  "branches": 80,
+  "functions": 80,
+  "lines": 80
+}

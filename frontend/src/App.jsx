@@ -3,7 +3,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import Courses from './pages/Courses';
-// import Classes from './pages/Classes';
+import Classes from './pages/Classes';
 
 export default function App() {
   return (
@@ -29,14 +29,14 @@ export default function App() {
           }
         />
 
-        {/* <Route
+        <Route
           path="/classes/*"
           element={
             <ProtectedRoute>
               <Classes />
             </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   );

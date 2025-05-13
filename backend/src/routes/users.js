@@ -81,5 +81,22 @@ router.get(
   }
 );
 
+router.get(
+  '/',
+  authMiddleware,
+  roleMiddleware(['admin']),
+  async (req, res) => {
+    try {
+      const { role } = req.query;
+      const filter = role ? { role } : {};
+      const users = await User.find(filter).select('name role');
+      res.json(users);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Erro ao listar usuários.' });
+    }
+  }
+);
+
 
 export default router;

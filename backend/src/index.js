@@ -7,6 +7,9 @@ dotenv.config();
 const app = express();
 app.use(cors(), express.json());
 
+import userRoutes from './routes/users.js';
+app.use('/users', userRoutes);
+
 app.get('/', (req, res) => res.send('API rodando!'));
 
 connectDB().then(() => {

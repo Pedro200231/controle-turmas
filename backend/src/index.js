@@ -10,6 +10,9 @@ app.use(cors(), express.json());
 import userRoutes from './routes/users.js';
 app.use('/users', userRoutes);
 
+import courseRoutes from './routes/courses.js';
+app.use('/courses', courseRoutes);
+
 app.get('/', (req, res) => res.send('API rodando!'));
 
 connectDB().then(() => {

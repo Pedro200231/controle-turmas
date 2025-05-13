@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test:backend": "mocha --recursive --require @babel/register --timeout 5000",
+    "test:e2e": "nyc mocha test/e2e --require @babel/register"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.27.1",
+    "chai": "^5.2.0",
+    "mocha": "^11.2.2",
+    "nodemon": "^3.1.10",
+    "nyc": "^17.1.0",
+    "supertest": "^7.1.1"
+  }
+}

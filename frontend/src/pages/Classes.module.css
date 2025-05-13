@@ -1,9 +1,8 @@
 .container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
   min-height: 100vh;
+  padding: 2rem;
   background-color: #000;
+  color: #e5e5e5;
 }
 
 .header {
@@ -11,80 +10,79 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
   border-bottom: 1px solid #2d2d2d;
+  padding-bottom: 1rem;
 }
 
 .title {
-  color: #dc2626;
   font-size: 1.8rem;
-  font-weight: 700;
+  color: #dc2626;
+  margin: 0;
 }
 
 .backButton {
-color: #dc2626;
-    background-color: #4e1c1caf;
-    border: 1px solid #7c7b7b8f;
-    border: none;
-    cursor: pointer;
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: uppercase;
+  background: rgba(220, 38, 38, 0.2);
+  color: #dc2626;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
-
 .backButton:hover {
-  background-color: #dc262610;
+  background: rgba(220, 38, 38, 0.4);
 }
 
 .errorMessage {
-  background-color: #dc262620;
-  color: #dc2626;
+  background: rgba(220, 38, 38, 0.1);
+  color: #f87171;
   padding: 1rem;
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #dc262640;
+  margin-bottom: 1.5rem;
 }
 
 .form {
   background-color: #0a0a0a;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid #1f1f1f;
   margin-bottom: 2rem;
 }
 
-.select {
-  width: 100%;
-  padding: 1rem;
-  background-color: #171717;
-  border: 1px solid #2d2d2d;
-  border-radius: 0.5rem;
-  color: white;
+.subTitle {
+  font-size: 1.25rem;
+  color: #e5e5e5;
   margin-bottom: 1rem;
-  transition: all 0.3s;
 }
 
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #171717;
+  color: #e5e5e5;
+  border: 1px solid #2d2d2d;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  transition: border 0.2s ease;
+}
 .select:focus {
   border-color: #dc2626;
   outline: none;
-  box-shadow: 0 0 0 2px #dc262630;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.3);
 }
 
 .button {
-  padding: 1rem 2rem;
   background-color: #dc2626;
-  color: white;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
-
 .button:hover {
   background-color: #b91c1c;
+  transform: translateY(-2px);
 }
 
 .classList {
@@ -100,25 +98,38 @@ color: #dc2626;
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid #1f1f1f;
-  transition: all 0.3s;
-  color: white;
+  transition: border 0.2s ease, transform 0.2s ease;
 }
-
 .classItem:hover {
   border-color: #dc2626;
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+}
+
+.classHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .studentForm {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .studentSelect {
   flex: 1;
-  composes: select;
-  margin-bottom: 0;
+  padding: 0.75rem;
+  background-color: #171717;
+  color: #e5e5e5;
+  border: 1px solid #2d2d2d;
+  border-radius: 0.5rem;
+  transition: border 0.2s ease;
+}
+.studentSelect:focus {
+  border-color: #dc2626;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.3);
 }
 
 .detailsButton {
@@ -126,11 +137,40 @@ color: #dc2626;
   border: none;
   color: #dc2626;
   cursor: pointer;
-  padding: 0;
-  margin-top: 1rem;
   text-decoration: underline;
+  transition: color 0.2s ease;
 }
-
 .detailsButton:hover {
   color: #b91c1c;
+}
+
+.studentList {
+  list-style: none;
+  padding: 1rem;
+  margin-top: 1rem;
+  background-color: #111;
+  border-radius: 0.5rem;
+  border: 1px solid #2d2d2d;
+  color: #e5e5e5;
+}
+.studentList li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #1f1f1f;
+}
+.studentList li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .backButton {
+    margin-top: 1rem;
+  }
+  .classHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

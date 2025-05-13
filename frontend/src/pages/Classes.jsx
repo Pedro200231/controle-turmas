@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function Classes() {
     const { user } = useContext(AuthContext);
+    const [students, setStudents] = useState([]);
     const [classes, setClasses] = useState([]);
     const [courses, setCourses] = useState([]);
     const [professors, setProfessors] = useState([]);
@@ -13,23 +14,36 @@ export default function Classes() {
     const [error, setError] = useState('');
 
     useEffect(() => {
+        if (!user) return;
+
         async function loadData() {
             try {
-                const [clsRes, crsRes, profRes] = await Promise.all([
+                const [clsRes, crsRes] = await Promise.all([
                     api.get('/classes'),
-                    api.get('/courses'),
-                    api.get('/users?role=professor')
+                    api.get('/courses')
                 ]);
+
                 setClasses(clsRes.data);
                 setCourses(crsRes.data);
-                setProfessors(profRes.data);
+
+                if (user.role === 'admin') {
+                    const profRes = await api.get('/users?role=professor');
+                    setProfessors(profRes.data);
+                }
+
+                if (user.role === 'professor') {
+                    const stuRes = await api.get('/users?role=aluno');
+                    setStudents(stuRes.data);
+                }
+
             } catch (err) {
                 console.error(err);
                 setError('Erro ao carregar dados.');
             }
         }
+
         loadData();
-    }, []);
+    }, [user]);
 
     const handleCreateClass = async e => {
         e.preventDefault();
@@ -127,13 +141,18 @@ export default function Classes() {
                         {/* Para professor: form de adicionar aluno */}
                         {user.role === 'professor' && c.professor._id === user._id && (
                             <div className="flex space-x-2">
-                                <input
-                                    type="text"
-                                    placeholder="ID do aluno"
+                                <select
                                     value={studentId}
                                     onChange={e => setStudentId(e.target.value)}
                                     className="flex-1 p-2 border rounded"
-                                />
+                                >
+                                    <option value="">Selecione o aluno</option>
+                                    {students.map(s => (
+                                        <option key={s._id} value={s._id}>
+                                            {s.name}
+                                        </option>
+                                    ))}
+                                </select>
                                 <button
                                     onClick={() => handleAddStudent(c._id)}
                                     className="px-3 py-1 bg-blue-600 text-white rounded"

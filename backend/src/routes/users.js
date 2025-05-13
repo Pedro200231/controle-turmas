@@ -2,6 +2,8 @@ import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { authMiddleware } from '../middleware/auth.js';
+import { roleMiddleware } from '../middleware/role.js';
 
 const router = Router();
 
@@ -54,6 +56,30 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Erro no servidor.' });
   }
 });
+
+router.get(
+  '/profile',
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      if (!user) return res.status(404).json({ message: 'Usuário não encontrado.' });
+      res.json(user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Erro no servidor.' });
+    }
+  }
+);
+
+router.get(
+  '/admin',
+  authMiddleware,
+  roleMiddleware(['admin']),
+  (req, res) => {
+    res.json({ message: 'Acesso de administrador confirmado.' });
+  }
+);
 
 
 export default router;

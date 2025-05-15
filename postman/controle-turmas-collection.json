@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "a6e3c680-a10c-4768-8d36-eae2636d04f8",
+		"name": "Controle Turmas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34426518"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Jope Droão\",\r\n  \"email\": \"jope@exemplo.com\",\r\n  \"password\": \"senha789\",\r\n  \"role\": \"professor\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jope@examplo.com\",\r\n  \"password\": \"senha123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjM0MDc4Yzg2ZDFjZDNhMTJiNGE3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzE0Mzk3OCwiZXhwIjoxNzQ3MTcyNzc4fQ.F215zrW3Y6qtLqX-DxX5NaCqysRnev7Gy3H2iPJfT4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/users/profile",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Admin",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjM0MDc4Yzg2ZDFjZDNhMTJiNGE3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzE0Mzk3OCwiZXhwIjoxNzQ3MTcyNzc4fQ.F215zrW3Y6qtLqX-DxX5NaCqysRnev7Gy3H2iPJfT4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/users/admin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Course",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjM0MDc4Yzg2ZDFjZDNhMTJiNGE3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzE0Mzk3OCwiZXhwIjoxNzQ3MTcyNzc4fQ.F215zrW3Y6qtLqX-DxX5NaCqysRnev7Gy3H2iPJfT4w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Biologia\",\r\n  \"description\": \"Curso introdutório de biologia.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/courses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Courses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjM0MDc4Yzg2ZDFjZDNhMTJiNGE3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzE0Mzk3OCwiZXhwIjoxNzQ3MTcyNzc4fQ.F215zrW3Y6qtLqX-DxX5NaCqysRnev7Gy3H2iPJfT4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/courses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Class",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjM0MDc4Yzg2ZDFjZDNhMTJiNGE3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzE0Mzk3OCwiZXhwIjoxNzQ3MTcyNzc4fQ.F215zrW3Y6qtLqX-DxX5NaCqysRnev7Gy3H2iPJfT4w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"course\": \"682350ff373f2b63087ea841\",\r\n  \"professor\": \"68234ae5373f2b63087ea831\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/classes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"classes"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Classes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjM0MDc4Yzg2ZDFjZDNhMTJiNGE3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzE0Mzk3OCwiZXhwIjoxNzQ3MTcyNzc4fQ.F215zrW3Y6qtLqX-DxX5NaCqysRnev7Gy3H2iPJfT4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/classes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Student",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"studentId\": \"6823443edb9962724844a413\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/classes/{{classId}}/students",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"classes",
+						"{{classId}}",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Students",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/classes/{{classId}}/students",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"classes",
+						"{{classId}}",
+						"students"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

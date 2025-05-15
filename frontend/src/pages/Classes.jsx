@@ -151,73 +151,82 @@ export default function Classes() {
             )}
 
             <ul className={styles.classList}>
-                {classes.map(c => (
-                    <li key={c._id} className={styles.classItem}>
-                        <div className={styles.classHeader}>
-                            <div>
-                                <p><strong>Curso:</strong> {c.course.name}</p>
-                                <p><strong>Prof:</strong> {c.professor.name}</p>
-                            </div>
-                            <p><strong>Alunos:</strong> {c.students.length}</p>
-                        </div>
-
-                        {user.role === 'professor' && c.professor._id === user._id && (
-                            <div className={styles.studentForm}>
-                                <select
-                                    value={studentIds[c._id] || ''}
-                                    onChange={e => {
-                                        setStudentIds(prev => ({ ...prev, [c._id]: e.target.value }));
-                                        setErrors(prev => ({ ...prev, [c._id]: '' }));
-                                    }}
-                                    className={styles.studentSelect}
-                                >
-                                    <option value="">Aluno...</option>
-                                    {students.map(s => (
-                                        <option key={s._id} value={s._id}>{s.name}</option>
-                                    ))}
-                                </select>
-                                <button onClick={() => handleAddStudent(c._id)} className={styles.button}>
-                                    Adicionar
-                                </button>
-                            </div>
-                        )}
-                         {errors[c._id] && (
-                                    <div className={styles.errorMessage}>
-                                        {errors[c._id]}
-                                    </div>
-                                )}
-                        <button
-                            onClick={async () => {
-                                const expanded = expandedClasses[c._id];
-                                if (!expanded) {
-                                    const res = await api.get(`/classes/${c._id}/students`);
-                                    setExpandedClasses(prev => ({ ...prev, [c._id]: res.data }));
-                                } else {
-                                    setExpandedClasses(prev => {
-                                        const copy = { ...prev };
-                                        delete copy[c._id];
-                                        return copy;
-                                    });
-                                }
-                            }}
-                            className={styles.detailsButton}
-                        >
-                            {expandedClasses[c._id] ? 'Ocultar Alunos' : 'Ver Alunos'}
-                        </button>
-
-                        {expandedClasses[c._id] && (
-                            <ul className={styles.studentList}>
-                                {expandedClasses[c._id].length ? (
-                                    expandedClasses[c._id].map(s => (
-                                        <li key={s._id}>{s.name} ({s.email})</li>
-                                    ))
-                                ) : (
-                                    <li>Nenhum aluno ainda.</li>
-                                )}
-                            </ul>
-                        )}
+                {classes.length === 0 ? (
+                    <li className={styles.classItem}>
+                        <p style={{ textAlign: 'center', color: '#f87171' }}>
+                            Nenhuma turma cadastrada.
+                        </p>
                     </li>
-                ))}
+                ) : (
+                    classes.map(c => (
+                        <li key={c._id} className={styles.classItem}>
+                            <div className={styles.classHeader}>
+                                <div>
+                                    <p><strong>Curso:</strong> {c.course.name}</p>
+                                    <p><strong>Prof:</strong> {c.professor.name}</p>
+                                </div>
+                                <p><strong>Alunos:</strong> {c.students.length}</p>
+                            </div>
+
+                            {user.role === 'professor' && c.professor._id === user._id && (
+                                <div className={styles.studentForm}>
+                                    <select
+                                        value={studentIds[c._id] || ''}
+                                        onChange={e => {
+                                            setStudentIds(prev => ({ ...prev, [c._id]: e.target.value }));
+                                            setErrors(prev => ({ ...prev, [c._id]: '' }));
+                                        }}
+                                        className={styles.studentSelect}
+                                    >
+                                        <option value="">Aluno...</option>
+                                        {students.map(s => (
+                                            <option key={s._id} value={s._id}>{s.name}</option>
+                                        ))}
+                                    </select>
+                                    <button onClick={() => handleAddStudent(c._id)} className={styles.button}>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            )}
+
+                            {errors[c._id] && (
+                                <div className={styles.errorMessage}>
+                                    {errors[c._id]}
+                                </div>
+                            )}
+                            <button
+                                onClick={async () => {
+                                    const expanded = expandedClasses[c._id];
+                                    if (!expanded) {
+                                        const res = await api.get(`/classes/${c._id}/students`);
+                                        setExpandedClasses(prev => ({ ...prev, [c._id]: res.data }));
+                                    } else {
+                                        setExpandedClasses(prev => {
+                                            const copy = { ...prev };
+                                            delete copy[c._id];
+                                            return copy;
+                                        });
+                                    }
+                                }}
+                                className={styles.detailsButton}
+                            >
+                                {expandedClasses[c._id] ? 'Ocultar Alunos' : 'Ver Alunos'}
+                            </button>
+
+                            {expandedClasses[c._id] && (
+                                <ul className={styles.studentList}>
+                                    {expandedClasses[c._id].length ? (
+                                        expandedClasses[c._id].map(s => (
+                                            <li key={s._id}>{s.name} ({s.email})</li>
+                                        ))
+                                    ) : (
+                                        <li>Nenhum aluno ainda.</li>
+                                    )}
+                                </ul>
+                            )}
+                        </li>
+                    ))
+                )}
             </ul>
         </div>
     );

@@ -30,10 +30,6 @@ export default function Dashboard() {
           <h2 className={styles.navTitle}>Turmas</h2>
           <p className={styles.navDesc}>Visualize e edite as turmas</p>
         </Link>
-        <Link to="/teachers" className={styles.navCard}>
-          <h2 className={styles.navTitle}>Professores</h2>
-          <p className={styles.navDesc}>Cadastre e gerencie professores</p>
-        </Link>
       </nav>
 
     </div>

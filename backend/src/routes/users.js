@@ -7,6 +7,7 @@ import { roleMiddleware } from '../middleware/role.js';
 
 const router = Router();
 
+// Registra um novo usuário
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -34,6 +35,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// Faz login do usuário
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -57,6 +59,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Lista um usuário autentificado
 router.get(
   '/profile',
   authMiddleware,
@@ -72,6 +75,7 @@ router.get(
   }
 );
 
+// Verifica se o usuário é um administrador
 router.get(
   '/admin',
   authMiddleware,
@@ -81,6 +85,7 @@ router.get(
   }
 );
 
+// Lista os usuários por permissão, com base no papel do usuário autenticado
 router.get(
   '/',
   authMiddleware,

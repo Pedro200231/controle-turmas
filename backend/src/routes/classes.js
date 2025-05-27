@@ -6,6 +6,7 @@ import { roleMiddleware } from '../middleware/role.js';
 
 const router = Router();
 
+// Cria uma nova turma
 router.post(
   '/',
   authMiddleware,
@@ -28,6 +29,7 @@ router.post(
   }
 );
 
+// Se o usuário for admin ou professor, lista todas as turmas; se for aluno, lista apenas as turmas em que está matriculado
 router.get(
   '/',
   authMiddleware,
@@ -35,10 +37,8 @@ router.get(
     try {
       const { id, role } = req.user;
       let classes;
-      if (role === 'admin') {
+      if (role === 'admin' || role === 'professor') {
         classes = await Class.find().populate('course professor', 'name');
-      } else if (role === 'professor') {
-        classes = await Class.find({ professor: id }).populate('course professor', 'name');
       } else {
         classes = await Class.find({ students: id }).populate('course professor', 'name');
       }
@@ -50,6 +50,7 @@ router.get(
   }
 );
 
+// Acrescenta um estudante a uma turma
 router.post(
   '/:id/students',
   authMiddleware,
@@ -79,10 +80,11 @@ router.post(
   }
 );
 
+// Mostra os estudantes de uma turma
 router.get(
   '/:id/students',
   authMiddleware,
-  roleMiddleware(['admin','professor','aluno']),
+  roleMiddleware(['admin', 'professor', 'aluno']),
   async (req, res) => {
     try {
       const turma = await Class.findById(req.params.id).populate('students', 'name email');

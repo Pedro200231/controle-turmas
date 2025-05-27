@@ -15,7 +15,6 @@ app.use('/courses', courseRoutes);
 import classRoutes from './routes/classes.js';
 app.use('/classes', classRoutes);
 
-app.get('/', (req, res) => res.send('API rodando!'));
 
 
 

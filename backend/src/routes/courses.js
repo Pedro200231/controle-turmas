@@ -5,6 +5,7 @@ import { roleMiddleware } from '../middleware/role.js';
 
 const router = Router();
 
+// Cria um novo curso
 router.post(
   '/',
   authMiddleware,
@@ -23,6 +24,7 @@ router.post(
   }
 );
 
+// Lista todos os cursos
 router.get(
   '/',
   authMiddleware,

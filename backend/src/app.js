@@ -15,8 +15,5 @@ app.use('/users', userRoutes);
 app.use('/courses', courseRoutes);
 app.use('/classes', classRoutes);
 
-// rota de saúde
-app.get('/', (req, res) => res.send('API rodando!'));
-
 
 export default app;

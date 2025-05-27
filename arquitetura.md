@@ -3,7 +3,7 @@
 ```mermaid
 flowchart LR
   subgraph Frontend [React App]
-    A[Login / Dashboard]
+    A[Login / Cadastro / Dashboard]
     B[Página de Cursos]
     C[Página de Turmas]
   end
@@ -21,6 +21,7 @@ flowchart LR
   end
 
   A --> D
+  A --> E
   B --> F
   C --> G
   D --> H

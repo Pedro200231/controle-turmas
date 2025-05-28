@@ -58,6 +58,7 @@ describe('Courses API', () => {
       .post('/courses')
       .set('Authorization', `Bearer ${tokenAluno}`)
       .send({ name: 'Física' });
+      
 
     expect(res.status).to.equal(403);
   });
